@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block title %} {{title}} {% endblock %}
+{% block body %}
+<div class="flex justify-center items-center flex-col mt-10 lg:h-[100vh] lg:mt-0">
+	<h2>{{title}}</h2>
+	<form class="flex flex-col items-center justify-center w-[300px]" id="form">
+		{% if producto %}
+		<div class="relative z-0 mb-6 w-full group hidden">
+			<input type="number" name="id" id="id"
+				class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+				placeholder=" " maxlength="11" value="{{producto.0}}" required />
+			<label for="id"
+				class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">N°
+				DE PRODUCTO</label>
+			<div id="mensaje_id" class="text-sm hidden text-red-400">
+				<p>Los datos ingresados no son correctos</p>
+			</div>
+		</div>
+		{%else %}
+		<div class="relative z-0 mb-6 w-full group">
+			<input type="number" name="id" id="id"
+				class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+				placeholder=" " maxlength="11" />
+			<label for="id"
+				class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">N°
+				DE PRODUCTO</label>
+			<div id="mensaje_id" class="text-sm hidden text-red-400">
+				<p>Los datos ingresados no son correctos</p>
+			</div>
+		</div>
+		{% endif %}
+		<div class="relative z-0 mb-6 w-full group">
+			<input type="text" name="nombre" id="nombre"
+				class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+				placeholder=" " minlength="2" maxlength="20" {% if producto %} value="{{producto.1}}" {% endif %} />
+			<label for="nombre"
+				class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">NOMBRE</label>
+			<div id="mensaje_nom" class="text-sm hidden text-red-400">
+				<p>Los datos ingresados no son correctos</p>
+			</div>
+		</div>
+
+		<div class="relative z-0 mb-6 w-full group">
+			<input type="number" name="valor" id="valor"
+				class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+				placeholder=" " {% if producto %} value="{{producto.2}}" {% endif %} step="0.01" />
+			<label for="valor"
+				class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">VALOR</label>
+			<div id="mensaje_val" class="text-sm hidden text-red-400">
+				<p>Los datos ingresados no son correctos</p>
+			</div>
+		</div>
+		<input type="checkbox" value="{{update}}" class="hidden" id="update" name="update">
+		<button type="submit" id="enviar"
+			class="w-full h-10 text-blue-700 transition-colors duration-200 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800">Enviar</button>
+
+	</form>
+</div>
+{% block script %}
+
+<script src="{{ url_for('static', filename='js/peticiones.js' ) }}"></script>
+<script src="{{ url_for('static', filename='js/formulario.js' ) }}"></script>
+{% endblock %}
+{% endblock %}
