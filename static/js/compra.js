@@ -50,21 +50,28 @@ const compra = async (tipoPago = 3) => {
 		pago,
 		total,
 	}
-	await setComprobante(data)
+	try {
+		await setComprobante(data)
 
-	carrito.forEach((producto) => {
-		const detalle = {
-			comprobante,
-			id: producto.id,
-			cantidad: producto.cantidad,
-			precioUnitario: parseFloat(producto.precio),
-		}
-		setDetalleComprobante(detalle)
-	})
+		await carrito.forEach((producto) => {
+			const detalle = {
+				comprobante,
+				id: producto.id,
+				cantidad: producto.cantidad,
+				precioUnitario: parseFloat(producto.precio),
+			}
+			setDetalleComprobante(detalle)
+		})
+		window.localStorage.removeItem('carrito')
+		setCarrito([])
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 Object.values($botonesPago).map((boton) =>
 	boton.addEventListener('click', (e) => {
+		console.log('click')
 		const tipoPago = e.target.id
 		compra(tipoPago)
 	})

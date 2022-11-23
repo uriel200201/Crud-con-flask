@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', recibirData())
 const $templateProducto = document.getElementById('tbody-template').content
 const $tbody = document.getElementById('tbody')
 const fragment = document.createDocumentFragment()
-const botones = document.querySelectorAll('.btn-eliminar')
 
 const setHtml = ({ productos }) => {
 	productos.forEach(({ id, nombre, precio }) => {
@@ -20,8 +19,10 @@ const setHtml = ({ productos }) => {
 		const clone = $templateProducto.cloneNode(true)
 		fragment.appendChild(clone)
 	})
+	const botones = document.getElementsByClassName('btn-eliminar')
+	console.log('🚀 ~ file: productos.js ~ line 6 ~ botones', botones)
 	$tbody.appendChild(fragment)
-	botones.forEach((boton) => {
+	Object.values(botones).forEach((boton) => {
 		boton.addEventListener('click', (e) => {
 			e.preventDefault()
 			const id = e.target.dataset.id

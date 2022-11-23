@@ -64,6 +64,7 @@ const setComprobante = async (data) => {
 			)
 		)
 }
+
 const setDetalleComprobante = async (detalle) => {
 	await axios
 		.post('/api/comprobantes/detalles', detalle)
