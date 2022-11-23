@@ -15,7 +15,7 @@ mysql = MySQL(app)
 
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-@app.route('/api/productos', methods =['GET', 'POST'])
+@app.route('/api/productos', methods = ['GET', 'POST'])
 def producto():
 	cursor = mysql.connection.cursor()
 	cursor.execute('SELECT * FROM productos ORDER BY id DESC')
@@ -23,7 +23,7 @@ def producto():
 	return jsonify(data)
 
 
-@app.route('/api/comprobantes', methods =['GET', 'POST'])
+@app.route('/api/comprobantes', methods = ['GET', 'POST'])
 def comprobante():
 	if req.method == 'POST':
 		comprobante = []
