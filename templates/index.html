@@ -2,17 +2,19 @@
 {% block title %} {{title}} {% endblock %}
 {% block body %}
 <div class="grid md:grid-cols-2 py-4">
-	<div id="caja" class="px-4">
+	<div id="caja" class="px-4 flex flex-col gap-3">
+
 		<select name="productos" id="productos"
 			class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 			<option value="">Seleccione un producto</option>
 		</select>
 
 		<div>
-			<h2>Precio:</h2>
-			<p id="precio"></p>
+			<h2>Precio: <span id="precio"></span></h2>
+
 		</div>
-		<div>
+
+		<div class="flex flex-row gap-2 items-center">
 			<h2>Cantidad:</h2>
 			<div class="inline-flex rounded-md shadow-sm" role="group" id="button-group">
 				<button type="button" id="restar"
@@ -28,6 +30,7 @@
 				</button>
 			</div>
 		</div>
+
 		<div>
 			<button type="button" id="enviar"
 				class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 cursor-not-allowed"
@@ -39,7 +42,8 @@
 		<div class="flex justify-around items-center mb-3">
 			<h2>Total del Carrito: <span id="neto"></span></h2>
 			<button type="button" data-modal-toggle="defaultModal"
-				class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+				class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-not-allowed"
+				disabled id="comprar">
 				<svg aria-hidden="true" class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
 					xmlns="http://www.w3.org/2000/svg">
 					<path
