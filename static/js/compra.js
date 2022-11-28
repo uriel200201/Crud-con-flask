@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', getComprobantes())
 const $botonesPago = document.getElementsByClassName('tipo-pago')
 console.log('🚀 ~ file: compra.js ~ line 3 ~ $botonesPago', $botonesPago)
 
@@ -59,6 +58,7 @@ const compra = async (tipoPago = 3) => {
 				id: producto.id,
 				cantidad: producto.cantidad,
 				precioUnitario: parseFloat(producto.precio),
+				nombre: producto.nombre,
 			}
 			setDetalleComprobante(detalle)
 		})

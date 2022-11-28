@@ -4,6 +4,7 @@ const $precio = document.getElementById('precio')
 const $btnEnviar = document.getElementById('enviar')
 const $buttonGroup = document.getElementById('button-group')
 const $cantidad = document.getElementById('cantidad')
+const $btnComprar = document.getElementById('comprar')
 // tabla
 const $items = document.getElementById('items')
 const $botones = document.getElementsByClassName('botones')
@@ -14,8 +15,6 @@ const botones = document.querySelectorAll('.btn-eliminar')
 // tabla footer
 const $tFooter = document.getElementById('footer')
 const $templateFooter = document.getElementById('tfoot-template').content
-
-const setFooter = () => {}
 
 const setCarrito = (carrito) => {
 	console.log('🚀 ~ file: index.js ~ line 21 ~ setCarrito ~ carrito', carrito)
@@ -79,7 +78,13 @@ const setHtml = (data) => {
 	document.getElementById('cantidad').innerHTML = 0
 	$precio.innerHTML = ''
 	setCarrito(carrito)
-	console.log('🚀 ~ file: index.js ~ line 82 ~ setHtml ~ carrito', carrito)
+	console.log('🚀 ~ file: index.js ~ line 81 ~ setHtml ~ carrito', carrito)
+	if (carrito.length > 0) {
+		console.log('no hay carrito')
+		$btnComprar.classList.remove('cursor-not-allowed')
+		$btnComprar.disabled = false
+		$btnComprar.dataset.modalToggle = 'defaultModal'
+	}
 }
 
 const addToCart = (idProduct, cantidad = 1) => {
@@ -146,6 +151,9 @@ const deleteToCart = (idProduct) => {
 			localStorage.setItem('carrito', JSON.stringify(newCarrito))
 		} else {
 			localStorage.removeItem('carrito')
+			$btnComprar.classList.add('cursor-not-allowed')
+			$btnComprar.disabled = true
+			$btnComprar.dataset.modalToggle = ''
 		}
 		window.location.href = '/'
 	}

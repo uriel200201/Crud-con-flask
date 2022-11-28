@@ -49,11 +49,21 @@ def detalles():
 		venta = req.get_json(force=True)
 		print(venta)
 		for data in venta.values():
+			print(data)
 			comprobante.append(data)
 		cursor = mysql.connection.cursor()
-		cursor.execute(f'INSERT INTO detalle_comprobantes VALUES ("{comprobante[0]}",{int(comprobante[1])},{int(comprobante[2])}, {float(comprobante[3])})')
+		cursor.execute(f'INSERT INTO detalle_comprobantes VALUES ("{comprobante[0]}",{int(comprobante[1])},{int(comprobante[2])}, {float(comprobante[3])}, "{comprobante[4]}")')
 		mysql.connection.commit()
 		return redirect(url_for('index'))
+
+	elif req.method == 'GET':
+		id = req.args.get('id','')
+		print(id)
+		cursor = mysql.connection.cursor()
+		cursor.execute(f'SELECT * FROM detalle_comprobantes WHERE comprobante = "{id}"')
+		data = cursor.fetchall()
+		print(data)
+		return jsonify(data)
 
 # * Página de inicio
 @app.route('/')
@@ -110,6 +120,18 @@ def eliminarProducto(id):
 	mysql.connection.commit()
 	flash('Alumno Eliminado Satisfactoriamente')
 	return redirect(url_for('productos'))
+
+@app.route('/comprobantes', methods = ['GET'])
+def comprobantes():
+	if req.method == 'GET':
+		title = 'Comprobantes'
+		return render_template('comprobantes.html', active = 'comprobantes', title = title)
+    
+@app.route('/comprobantes/<id>', methods=['GET'])
+def pagDetalles(id):
+	if req.method == 'GET':
+		title = f'Comprobante: {id}'
+		return render_template('detalles.html', active = 'comprobantes', title = title)
 
 if __name__ == '__main__':
 	app.run(port=PORT, debug=True)

@@ -52,6 +52,8 @@ const getComprobantes = async () => {
 				error
 			)
 		)
+
+	setHTML()
 }
 
 const setComprobante = async (data) => {
@@ -74,4 +76,29 @@ const setDetalleComprobante = async (detalle) => {
 				error
 			)
 		)
+}
+
+const getDetalleComprobante = async (id) => {
+	const productos = []
+	let headersList = {
+		Accept: '*/*',
+	}
+
+	let reqOptions = {
+		url: `http://localhost:3000/api/comprobantes/detalles?id=${id}`,
+		method: 'GET',
+		headers: headersList,
+	}
+
+	let res = await axios.request(reqOptions)
+	res.data.map((producto) => {
+		productos.push({
+			id: producto[1],
+			cantidad: producto[2],
+			precio: producto[3],
+			nombre: producto[4],
+		})
+	})
+	console.log(res.data)
+	return productos
 }
